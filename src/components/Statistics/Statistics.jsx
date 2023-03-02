@@ -1,18 +1,15 @@
-import styled from 'styled-components';
+import { Container } from './Statistics.styled';
 import Title from '../Title/Title';
+import StatisticsList from './StatisticsList/StatisticsList';
+import data from '../../json/data';
 
 const Statistics = () => {
   return (
     <Container>
       <Title title="Statistics" />
+      <StatisticsList data={data} />
     </Container>
   );
 };
-
-const Container = styled.div`
-  background-color: ${(props) => props.backgroundColor};
-  margin: 0 auto;
-  width: 20%;
-`;
 
 export default Statistics;
