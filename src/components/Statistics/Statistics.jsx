@@ -1,8 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import Title from '../Title/Title';
 
 const Statistics = () => {
   return (
-    <Container backgroundColor="skyblue">I am Statistics component</Container>
+    <Container>
+      <Title title="Statistics" />
+    </Container>
   );
 };
 
@@ -11,13 +14,5 @@ const Container = styled.div`
   margin: 0 auto;
   width: 20%;
 `;
-
-// const Input = styled.input.attrs(({ type }) => ({
-//     type:  type || "password"
-//   }))`
-//     align-items: center;
-//     display: flex;
-//     margin: 1.5vh 0;
-//   `
 
 export default Statistics;
