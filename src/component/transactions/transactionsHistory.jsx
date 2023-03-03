@@ -1,23 +1,13 @@
-import TableRow from '../TableRow/TableRow';
+import Table from '../table/table';
+import Thead from '../thead/thead';
+import Tbody from '../tbody/Tbody';
 
-const TransactionHistory = props => {
+const TransactionHistory = (props) => {
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>№</th>
-          <th>PRICE</th>
-          <th>AMOUNT</th>
-          <th>DATE</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {props.items.map((item, index) => {
-          return <TableRow key={item.id} number={index + 1} item={item} />;
-        })}
-      </tbody>
-    </table>
+    <Table>
+      <Thead />
+      <Tbody items={props.items} />
+    </Table>
   );
 };
 
