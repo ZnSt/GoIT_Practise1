@@ -1,9 +1,9 @@
-import transactions from "./data/transaction.json";
-import TransactionHistory from "./component/transactions/transactionsHistory";
+import transactions from './data/transaction.json';
+import TransactionHistory from './component/transactions/transactionsHistory';
 const App = () => {
   return (
     <div>
-      <TransactionHistory items={transactions} />;
+      <TransactionHistory items={transactions} />
     </div>
   );
 };
