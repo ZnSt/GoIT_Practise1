@@ -1,4 +1,6 @@
-const TransactionHistory = (props) => {
+import TableRow from '../TableRow/TableRow';
+
+const TransactionHistory = props => {
   return (
     <table>
       <thead>
@@ -11,15 +13,8 @@ const TransactionHistory = (props) => {
       </thead>
 
       <tbody>
-        {props.items.map(({ id, price, amount, date }, index) => {
-          return (
-            <tr key={id}>
-              <td>{index + 1}</td>
-              <td>{price}</td>
-              <td>{amount}</td>
-              <td>{date}</td>
-            </tr>
-          );
+        {props.items.map((item, index) => {
+          return <TableRow key={item.id} number={index + 1} item={item} />;
         })}
       </tbody>
     </table>
