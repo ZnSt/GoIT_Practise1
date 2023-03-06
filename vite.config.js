@@ -9,6 +9,7 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src/components"),
       media: path.resolve(__dirname, "./src/assets"),
+      data: path.resolve(__dirname, "./src/data"),
     },
   },
 });

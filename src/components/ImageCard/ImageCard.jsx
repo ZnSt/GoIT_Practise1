@@ -1,9 +1,9 @@
-import { Component } from "react";
+import { Image } from "./ImageCard.styled";
 
 export const ImageCard = (props) => {
   return (
     <div>
-      <img src={props.src} alt={props.alt} />
+      <Image src={props.src} alt={props.alt} />
     </div>
   );
 };
