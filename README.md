@@ -1,3 +1,3 @@
-WEEK 1 - DAY 3
+WEEK 2 - DAY 1
 
-TASK: https://github.com/josserden/react-blended/blob/lesson-01/source-code/task%234.md
+TASK: https://github.com/josserden/react-blended/blob/lesson-02/source-code/task%231.md
