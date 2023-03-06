@@ -1,7 +1,9 @@
-import { Component } from 'react';
+import { Component } from "react";
 
-export class ImageCard extends Component {
-  render() {
-    return;
-  }
-}
+export const ImageCard = (props) => {
+  return (
+    <div>
+      <img src={props.src} alt={props.alt} />
+    </div>
+  );
+};

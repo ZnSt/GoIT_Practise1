@@ -1,3 +1,5 @@
-export const Header = ({ children }) => {
-  return <header>{children}</header>;
+import { Header } from "./Header.styled";
+
+export const HeaderComponent = ({ children }) => {
+  return <Header>{children}</Header>;
 };

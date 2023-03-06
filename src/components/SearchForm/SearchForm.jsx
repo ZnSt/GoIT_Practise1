@@ -1,9 +1,22 @@
-import { Component } from 'react';
-import { Input } from '@/Input';
+import { Component } from "react";
+import { Input } from "@/Input";
 
 export class SearchForm extends Component {
   state = {
-    value: '',
+    value: "",
+  };
+
+  componentDidMount() {
+    console.log("Я народився");
+  }
+
+  componentDidUpdate() {
+    console.log("Я еволюціонував");
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(this.state.value);
   };
 
   handleChange = (event) => {
@@ -15,7 +28,7 @@ export class SearchForm extends Component {
   render() {
     const { value } = this.state;
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <Input onChange={this.handleChange} value={value} />
       </form>
     );
