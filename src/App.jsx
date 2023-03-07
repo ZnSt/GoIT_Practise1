@@ -6,14 +6,21 @@ import { Component } from "react";
 
 class App extends Component {
   state = {
-    photos: []
-  }
+    photos: [],
+    oldQuery: "",
+  };
   handleSubmit = async (event) => {
     event.preventDefault();
-    const photos = await fetchPhotos(event.target.elements.searchfield.value);
-    this.setState((prev) => (
-      {photos : prev.photos.concat(photos)}
-    ))
+    console.log(event.target.elements);
+    const query = event.target.elements.searchfield.value;
+    const photos = await fetchPhotos(query);
+    if (query !== this.state.oldQuery) {
+      this.setState({
+        photos: photos,
+      });
+    } else {
+      this.setState((prev) => ({ photos: prev.photos.concat(photos) }));
+    }
   };
   render() {
     return (
@@ -21,7 +28,7 @@ class App extends Component {
         <HeaderComponent>
           <SearchForm onSubmit={this.handleSubmit} />
         </HeaderComponent>
-        <ImageGrid images={this.state.photos}/>
+        <ImageGrid images={this.state.photos} />
       </div>
     );
   }

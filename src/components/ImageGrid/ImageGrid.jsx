@@ -17,7 +17,7 @@ class ImageGrid extends React.Component {
             {this.props.images.map((item, index) => {
               return (
                 <GridItem key={index}>
-                  <ImageCard src={item.src?.original} alt={item.alt} />
+                  <ImageCard src={item.src?.tiny} alt={item.alt} />
                 </GridItem>
               );
             })}
