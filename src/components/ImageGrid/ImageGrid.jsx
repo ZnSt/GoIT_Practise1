@@ -1,21 +1,20 @@
-import React from 'react';
-import { ImageCard } from '@/ImageCard';
-import { Grid, GridItem } from './ImageGrid.styled';
+import React from "react";
+import { ImageCard } from "@/ImageCard";
+import { Grid, GridItem } from "./ImageGrid.styled";
 
 class ImageGrid extends React.Component {
-  state = {
-    images: [],
-    isLoading: true,
-  };
+  constructor(props) {
+    super(props);
+  }
 
   render() {
     return (
       <>
-        {this.state.isLoading ? (
+        {this.props.isLoading ? (
           <h2>Loading...</h2>
         ) : (
           <Grid>
-            {this.state.images.map((item, index) => {
+            {this.props.images.map((item, index) => {
               return (
                 <GridItem key={index}>
                   <ImageCard src={item.src?.original} alt={item.alt} />
