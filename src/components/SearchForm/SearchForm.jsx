@@ -1,31 +1,31 @@
-import { Component } from "react";
-import { Input } from "@/Input";
+import { Component } from 'react';
+import { Input } from '@/Input';
 
 export class SearchForm extends Component {
   state = {
-    value: "",
+    value: '',
   };
 
-  componentDidUpdate() {
-    if (this.timeout !== null) {
-      clearTimeout(this.timeout);
-    }
+  // componentDidUpdate() {
+  //   if (this.timeout !== null) {
+  //     clearTimeout(this.timeout);
+  //   }
 
-    this.timeout = setTimeout(() => {
-      console.log(this.state.value);
-    }, 200);
-  }
+  //   this.timeout = setTimeout(() => {
+  //     console.log(this.state.value);
+  //   }, 200);
+  // }
 
-  handleChange = (event) => {
-    this.setState({
-      value: event.target.value,
-    });
-  };
-
-  // handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   console.log(this.state.value);
+  // handleChange = (event) => {
+  //   this.setState({
+  //     value: event.target.value,
+  //   });
   // };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(this.state.value);
+  };
 
   render() {
     const { value } = this.state;

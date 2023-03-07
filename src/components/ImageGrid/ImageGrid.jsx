@@ -1,7 +1,8 @@
-import React from "react";
-import { ImageCard } from "@/ImageCard";
-import { Grid, GridItem } from "./ImageGrid.styled";
+import React from 'react';
+import { ImageCard } from '@/ImageCard';
+import { Grid, GridItem } from './ImageGrid.styled';
 
+const KEY = 'FUF46zmaymVZvGw1wx0nala6QHuqbE1w0kI9oWyzHnobGgsDvb6qlK4J';
 class ImageGrid extends React.Component {
   state = {
     images: [],
@@ -10,9 +11,14 @@ class ImageGrid extends React.Component {
 
   componentDidMount() {
     (async () => {
-      const result = await fetch("src/data/imageUrls.json");
-      const { images } = await result.json();
-      this.setState({ images: images, isLoading: false });
+      const result = await fetch('https://api.pexels.com/v1/search?query=cats', {
+        headers: {
+          Authorization: KEY,
+        },
+      });
+      const { photos } = await result.json();
+
+      this.setState({ images: photos, isLoading: false });
     })();
   }
 
@@ -23,11 +29,13 @@ class ImageGrid extends React.Component {
           <h2>Loading...</h2>
         ) : (
           <Grid>
-            {this.state.images.map((item, index) => (
-              <GridItem key={index}>
-                <ImageCard src={item.url} alt={item.alt} />
-              </GridItem>
-            ))}
+            {this.state.images.map((item, index) => {
+              return (
+                <GridItem key={index}>
+                  <ImageCard src={item.src?.original} alt={item.alt} />
+                </GridItem>
+              );
+            })}
           </Grid>
         )}
       </>
