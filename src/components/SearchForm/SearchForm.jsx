@@ -1,11 +1,11 @@
 import { Component } from 'react';
 import { Input } from '@/Input';
+import { fetchPhotos } from 'api/api';
 
 export class SearchForm extends Component {
-  state = {
-    value: '',
-  };
-
+  constructor(props) {
+    super(props);
+  }
   // componentDidUpdate() {
   //   if (this.timeout !== null) {
   //     clearTimeout(this.timeout);
@@ -22,16 +22,10 @@ export class SearchForm extends Component {
   //   });
   // };
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(this.state.value);
-  };
-
   render() {
-    const { value } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <Input onChange={this.handleChange} value={value} />
+      <form onSubmit={this.props.onSubmit}>
+        <Input />
       </form>
     );
   }

@@ -1,20 +1,12 @@
-import React from "react";
-import { ImageCard } from "@/ImageCard";
-import { Grid, GridItem } from "./ImageGrid.styled";
-import { fetchPhotos } from "api/api";
+import React from 'react';
+import { ImageCard } from '@/ImageCard';
+import { Grid, GridItem } from './ImageGrid.styled';
 
 class ImageGrid extends React.Component {
   state = {
     images: [],
     isLoading: true,
   };
-
-  componentDidMount() {
-    (async () => {
-      const photos = await fetchPhotos("car");
-      this.setState({ images: photos, isLoading: false });
-    })();
-  }
 
   render() {
     return (
