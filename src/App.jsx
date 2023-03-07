@@ -8,18 +8,29 @@ class App extends Component {
   state = {
     photos: [],
     oldQuery: "",
+    isLoading: false,
   };
   handleSubmit = async (event) => {
     event.preventDefault();
+    this.setState({
+      isLoading: true,
+    });
     console.log(event.target.elements);
     const query = event.target.elements.searchfield.value;
     const photos = await fetchPhotos(query);
     if (query !== this.state.oldQuery) {
       this.setState({
         photos: photos,
+        isLoading: false,
+        oldQuery: query,
       });
     } else {
-      this.setState((prev) => ({ photos: prev.photos.concat(photos) }));
+      this.setState((prev) => ({
+        ...prev,
+        photos: prev.photos.concat(photos),
+        isLoading: false,
+        oldQuery: query,
+      }));
     }
   };
   render() {
