@@ -7,40 +7,51 @@ import { Component } from "react";
 class App extends Component {
   state = {
     photos: [],
-    oldQuery: "",
     isLoading: false,
+    query: "",
   };
-  handleSubmit = async (event) => {
+
+  async componentDidUpdate(_, prevState) {
+    if (this.state.isLoading) {
+      const photos = await fetchPhotos(this.state.query);
+
+      if (this.state.query !== prevState.query) {
+        this.setState({
+          photos: photos,
+          isLoading: false,
+        });
+      } else {
+        this.setState({
+          ...prevState,
+          photos: prevState.photos.concat(photos),
+          isLoading: false,
+        });
+      }
+    }
+  }
+
+  handleSubmit = (event) => {
     event.preventDefault();
     this.setState({
       isLoading: true,
+      query: event.target.elements.searchfield.value,
     });
-    console.log(event.target.elements);
-    const query = event.target.elements.searchfield.value;
-    const photos = await fetchPhotos(query);
-    if (query !== this.state.oldQuery) {
-      this.setState({
-        photos: photos,
-        isLoading: false,
-        oldQuery: query,
-      });
-    } else {
-      this.setState((prev) => ({
-        ...prev,
-        photos: prev.photos.concat(photos),
-        isLoading: false,
-        oldQuery: query,
-      }));
-    }
   };
+
   render() {
     return (
-      <div>
-        <HeaderComponent>
-          <SearchForm onSubmit={this.handleSubmit} />
-        </HeaderComponent>
-        <ImageGrid images={this.state.photos} />
-      </div>
+      <>
+        {this.state.isLoading ? (
+          <h1>Loading...</h1>
+        ) : (
+          <div>
+            <HeaderComponent>
+              <SearchForm onSubmit={this.handleSubmit} />
+            </HeaderComponent>
+            <ImageGrid images={this.state.photos} />
+          </div>
+        )}
+      </>
     );
   }
 }
