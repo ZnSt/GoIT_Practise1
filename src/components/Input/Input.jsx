@@ -1,18 +1,21 @@
-import SearchSVG from 'media/searchSVG';
+import SearchSVG from "media/searchSVG";
+import { useEffect } from "react";
+import { InputContainer, InputField, Button } from "./Input.styled";
 
-export const Input = ({ value, onChange }) => {
+export const Input = ({ value, onChange, isRequired }) => {
   return (
-    <div>
-      <input
+    <InputContainer>
+      <InputField
         name="searchfield"
         type="text"
         placeholder="Search me..."
         value={value}
         onChange={onChange}
+        required={isRequired}
       />
-      <button>
+      <Button>
         <SearchSVG></SearchSVG>
-      </button>
-    </div>
+      </Button>
+    </InputContainer>
   );
 };
