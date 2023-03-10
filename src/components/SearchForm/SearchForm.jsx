@@ -1,12 +1,8 @@
 import { Component } from "react";
 import { Input } from "@/Input";
-import { fetchPhotos } from "api/api";
 import PropTypes from "prop-types";
 
 export class SearchForm extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
   // componentDidUpdate() {
   //   if (this.timeout !== null) {
   //     clearTimeout(this.timeout);

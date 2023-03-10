@@ -41,16 +41,15 @@ class App extends Component {
   render() {
     return (
       <>
-        {this.state.isLoading ? (
-          <h1>Loading...</h1>
-        ) : (
-          <div>
-            <HeaderComponent>
-              <SearchForm onSubmit={this.handleSubmit} />
-            </HeaderComponent>
-            <ImageGrid images={this.state.photos} />
-          </div>
-        )}
+        <div>
+          <HeaderComponent>
+            <SearchForm onSubmit={this.handleSubmit} />
+          </HeaderComponent>
+          <ImageGrid
+            images={this.state.photos}
+            isLoading={this.state.isLoading}
+          />
+        </div>
       </>
     );
   }
