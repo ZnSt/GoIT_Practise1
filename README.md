@@ -1,9 +1,9 @@
-WEEK 2 - DAY 2
+WEEK 2 - DAY 5
 
 TASK: https://github.com/josserden/react-blended/blob/lesson-02/source-code/task%231.md
 
-1. Debounce
-2. Console Ninja extension
-3. Grid with placeholder data
-4. Api
+1. Loading logic
+2. Pagination
+3. Infinite scroll
+4. Pages
 5. Styling
