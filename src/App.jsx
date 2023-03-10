@@ -36,7 +36,19 @@ class App extends Component {
       }
     }
   }
+  componentDidMount() {
+    window.addEventListener("scroll", this.onScroll);
+  }
+  onScroll = (e) => {
+    // console.log(window.scrollY);
+    let scrollY = window.scrollY;
+    let innerHeight = window.innerHeight;
+    let offsetHeight = document.body.offsetHeight;
 
+    if (scrollY + innerHeight > offsetHeight - 100) {
+      this.setState({ isLoading: true });
+    }
+  };
   handleSubmit = (event) => {
     event.preventDefault();
     this.setState({
