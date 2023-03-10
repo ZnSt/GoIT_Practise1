@@ -1,15 +1,27 @@
-import { SearchForm } from "@/SearchForm";
-import { HeaderComponent } from "@/Header";
-import { ImageGrid } from "@/ImageGrid";
-import { fetchPhotos } from "api/api";
-import { Component } from "react";
-
+import { SearchForm } from '@/SearchForm';
+import { HeaderComponent } from '@/Header';
+import { ImageGrid } from '@/ImageGrid';
+import { fetchPhotos } from 'api/api';
+import { Component } from 'react';
+import Modal from '@/Modal/Modal';
 class App extends Component {
   state = {
     photos: [],
     isLoading: false,
-    query: "",
+    query: '',
     curPage: 1,
+    showModal: false,
+    modalImage: null,
+  };
+
+  toggleModal = () => {
+    this.setState((prevState) => ({
+      showModal: !prevState.showModal,
+    }));
+  };
+
+  openPicture = (url) => {
+    this.setState({ modalImage: url });
   };
 
   async componentDidUpdate(_, prevState) {
@@ -23,10 +35,7 @@ class App extends Component {
           curPage: 1,
         });
       } else {
-        const photos = await fetchPhotos(
-          this.state.query,
-          this.state.curPage + 1
-        );
+        const photos = await fetchPhotos(this.state.query, this.state.curPage + 1);
         this.setState({
           ...prevState,
           photos: prevState.photos.concat(photos),
@@ -46,15 +55,19 @@ class App extends Component {
   };
 
   render() {
+    const { showModal, photos, isLoading, modalImage } = this.state;
     return (
       <div>
         <HeaderComponent>
           <SearchForm onSubmit={this.handleSubmit} />
         </HeaderComponent>
         <ImageGrid
-          images={this.state.photos}
-          isLoading={this.state.isLoading}
+          images={photos}
+          isLoading={isLoading}
+          openModal={this.toggleModal}
+          getPicture={this.openPicture}
         />
+        {showModal && <Modal src={modalImage} />}
       </div>
     );
   }
