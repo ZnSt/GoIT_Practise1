@@ -9,22 +9,29 @@ class App extends Component {
     photos: [],
     isLoading: false,
     query: "",
+    curPage: 1,
   };
 
   async componentDidUpdate(_, prevState) {
+    console.log(this.state.curPage);
     if (this.state.isLoading) {
-      const photos = await fetchPhotos(this.state.query);
-
       if (this.state.query !== prevState.query) {
+        const photos = await fetchPhotos(this.state.query, 1);
         this.setState({
           photos: photos,
           isLoading: false,
+          curPage: 1,
         });
       } else {
+        const photos = await fetchPhotos(
+          this.state.query,
+          this.state.curPage + 1
+        );
         this.setState({
           ...prevState,
           photos: prevState.photos.concat(photos),
           isLoading: false,
+          curPage: prevState.curPage + 1,
         });
       }
     }
