@@ -4,7 +4,7 @@ import { ModalStyle, Overlay } from './Modal.styled';
 class Modal extends Component {
   render() {
     return (
-      <Overlay>
+      <Overlay onClick={this.props.toggleModal}>
         <ModalStyle>
           <img src={this.props.src} alt="" width="500" />
         </ModalStyle>

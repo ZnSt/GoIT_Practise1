@@ -1,20 +1,20 @@
-import { SearchForm } from "@/SearchForm";
-import { HeaderComponent } from "@/Header";
-import { ImageGrid } from "@/ImageGrid";
-import { fetchPhotos } from "api/api";
-import { Component, useEffect, useState } from "react";
-import Modal from "@/Modal/Modal";
+import { SearchForm } from '@/SearchForm';
+import { HeaderComponent } from '@/Header';
+import { ImageGrid } from '@/ImageGrid';
+import { fetchPhotos } from 'api/api';
+import { Component, useEffect, useState } from 'react';
+import Modal from '@/Modal/Modal';
 
 function App() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [prevQuery, setPrevQuery] = useState("");
+  const [prevQuery, setPrevQuery] = useState('');
   const [curPage, setCurPage] = useState(1);
   const [photos, setPhotos] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [modalImage, setModalImage] = useState(null);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     setQuery(event.target.elements.searchfield.value);
     setIsLoading(true);
@@ -24,9 +24,23 @@ function App() {
     setShowModal(!showModal);
   };
 
-  const openPicture = (url) => {
+  const openPicture = url => {
     setModalImage(url);
   };
+
+  const onScroll = e => {
+    let scrollY = window.scrollY;
+    let innerHeight = window.innerHeight;
+    let offsetHeight = document.body.offsetHeight;
+
+    if (scrollY + innerHeight > offsetHeight - 100) {
+      setIsLoading(true);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
     // componentDidUpdate check isLoading
@@ -59,7 +73,7 @@ function App() {
         openModal={toggleModal}
         getPicture={openPicture}
       />
-      {showModal && <Modal src={modalImage} />}
+      {showModal && <Modal toggleModal={toggleModal} src={modalImage} />}
     </div>
   );
 }
