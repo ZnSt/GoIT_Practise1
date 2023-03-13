@@ -1,14 +1,14 @@
-import { SearchForm } from '@/SearchForm';
-import { HeaderComponent } from '@/Header';
-import { ImageGrid } from '@/ImageGrid';
-import { fetchPhotos } from 'api/api';
-import { Component } from 'react';
-import Modal from '@/Modal/Modal';
+import { SearchForm } from "@/SearchForm";
+import { HeaderComponent } from "@/Header";
+import { ImageGrid } from "@/ImageGrid";
+import { fetchPhotos } from "api/api";
+import { Component } from "react";
+import Modal from "@/Modal/Modal";
 class App extends Component {
   state = {
     photos: [],
     isLoading: false,
-    query: '',
+    query: "",
     curPage: 1,
     showModal: false,
     modalImage: null,
@@ -26,6 +26,7 @@ class App extends Component {
 
   async componentDidUpdate(_, prevState) {
     console.log(this.state.curPage);
+    console.log("componentDidUpdate");
     if (this.state.isLoading) {
       if (this.state.query !== prevState.query) {
         const photos = await fetchPhotos(this.state.query, 1);
@@ -35,7 +36,10 @@ class App extends Component {
           curPage: 1,
         });
       } else {
-        const photos = await fetchPhotos(this.state.query, this.state.curPage + 1);
+        const photos = await fetchPhotos(
+          this.state.query,
+          this.state.curPage + 1
+        );
         this.setState({
           ...prevState,
           photos: prevState.photos.concat(photos),
@@ -46,10 +50,12 @@ class App extends Component {
     }
   }
   componentDidMount() {
+    console.log("componentDidMount");
     window.addEventListener("scroll", this.onScroll);
   }
   onScroll = (e) => {
     // console.log(window.scrollY);
+    console.log("onScroll");
     let scrollY = window.scrollY;
     let innerHeight = window.innerHeight;
     let offsetHeight = document.body.offsetHeight;
@@ -58,6 +64,7 @@ class App extends Component {
       this.setState({ isLoading: true });
     }
   };
+
   handleSubmit = (event) => {
     event.preventDefault();
     this.setState({
