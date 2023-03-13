@@ -42,7 +42,7 @@ class App extends Component {
         );
         this.setState({
           ...prevState,
-          photos: prevState.photos.concat(photos),
+          photos: [...prevState.photos, ...photos],
           isLoading: false,
           curPage: prevState.curPage + 1,
         });

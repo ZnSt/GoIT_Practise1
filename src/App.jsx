@@ -1,16 +1,18 @@
-import { SearchForm } from '@/SearchForm';
-import { HeaderComponent } from '@/Header';
-import { ImageGrid } from '@/ImageGrid';
-import { fetchPhotos } from 'api/api';
-import { Component, useEffect, useState } from 'react';
-import Modal from '@/Modal/Modal';
+import { SearchForm } from "@/SearchForm";
+import { HeaderComponent } from "@/Header";
+import { ImageGrid } from "@/ImageGrid";
+import { fetchPhotos } from "api/api";
+import { Component, useEffect, useState } from "react";
+import Modal from "@/Modal/Modal";
 
 function App() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [prevQuery, setPrevQuery] = useState('');
+  const [prevQuery, setPrevQuery] = useState("");
   const [curPage, setCurPage] = useState(1);
   const [photos, setPhotos] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [modalImage, setModalImage] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -18,22 +20,30 @@ function App() {
     setIsLoading(true);
   };
 
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
+  const openPicture = (url) => {
+    setModalImage(url);
+  };
+
   useEffect(() => {
     // componentDidUpdate check isLoading
-    const getPhotos = async (page) => {
-      const photos = await fetchPhotos(query, page);
+
+    const getPhotos = async (page, data) => {
+      const images = await fetchPhotos(query, page);
       setIsLoading(false);
-      setPhotos(photos);
+      setPhotos([...data, ...images]);
+      setCurPage(curPage + 1);
     };
     if (isLoading) {
       if (query !== prevQuery) {
-        getPhotos(curPage);
         setPrevQuery(query);
-
-        console.log('if ');
+        setCurPage(1);
+        getPhotos(curPage, []);
       } else {
-        getPhotos(curPage);
-        console.log('else, ');
+        getPhotos(curPage, photos);
       }
     }
   }, [isLoading]);
@@ -46,10 +56,10 @@ function App() {
       <ImageGrid
         images={photos}
         isLoading={isLoading}
-        // openModal={this.toggleModal}
-        // getPicture={this.openPicture}
+        openModal={toggleModal}
+        getPicture={openPicture}
       />
-      {/* {showModal && <Modal src={modalImage} />} */}
+      {showModal && <Modal src={modalImage} />}
     </div>
   );
 }

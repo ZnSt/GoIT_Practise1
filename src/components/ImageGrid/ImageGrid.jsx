@@ -1,6 +1,6 @@
-import React from 'react';
-import { ImageCard } from '@/ImageCard';
-import { Grid, GridItem } from './ImageGrid.styled';
+import React from "react";
+import { ImageCard } from "@/ImageCard";
+import { Grid, GridItem } from "./ImageGrid.styled";
 
 class ImageGrid extends React.Component {
   openPicture = (src) => {
@@ -12,9 +12,11 @@ class ImageGrid extends React.Component {
       <>
         <Grid>
           {this.props.images.map((item, index) => {
-            console.log(this.props.images);
             return (
-              <GridItem key={index} onClick={() => this.openPicture(item.src.original)}>
+              <GridItem
+                key={index}
+                onClick={() => this.openPicture(item.src.original)}
+              >
                 <ImageCard src={item.src?.tiny} alt={item.alt} />
               </GridItem>
             );
