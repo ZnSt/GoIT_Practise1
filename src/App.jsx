@@ -3,7 +3,8 @@ import { HeaderComponent } from "@/Header";
 import { ImageGrid } from "@/ImageGrid";
 import { fetchPhotos } from "api/api";
 import { useEffect, useState, useRef } from "react";
-import Modal from "@/Modal/Modal";
+import { GalleryContext } from "./context";
+//
 
 function App() {
   const [query, setQuery] = useState("");
@@ -11,21 +12,11 @@ function App() {
   const [prevQuery, setPrevQuery] = useState("");
   const [curPage, setCurPage] = useState(1);
   const [photos, setPhotos] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [modalImage, setModalImage] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setQuery(event.target.elements.searchfield.value);
     setIsLoading(true);
-  };
-
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  };
-
-  const openPicture = (url) => {
-    setModalImage(url);
   };
 
   const onScroll = (e) => {
@@ -63,18 +54,12 @@ function App() {
   }, [isLoading]);
 
   return (
-    <div>
+    <GalleryContext.Provider value={{ images: photos }}>
       <HeaderComponent>
         <SearchForm onSubmit={handleSubmit} />
       </HeaderComponent>
-      <ImageGrid
-        images={photos}
-        isLoading={isLoading}
-        openModal={toggleModal}
-        getPicture={openPicture}
-      />
-      {showModal && <Modal toggleModal={toggleModal} src={modalImage} />}
-    </div>
+      <ImageGrid isLoading={isLoading} />
+    </GalleryContext.Provider>
   );
 }
 

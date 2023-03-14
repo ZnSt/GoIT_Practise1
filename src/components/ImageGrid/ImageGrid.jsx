@@ -1,31 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { ImageCard } from "@/ImageCard";
 import { Grid, GridItem } from "./ImageGrid.styled";
+import { useGalleryContext } from "../../context";
+import Modal from "@/Modal/Modal";
 
-class ImageGrid extends React.Component {
-  openPicture = (src) => {
-    this.props.getPicture(src);
-    this.props.openModal();
+const ImageGrid = ({ isLoading }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [modalImage, setModalImage] = useState(null);
+
+  const { images } = useGalleryContext();
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
   };
-  render() {
-    return (
-      <>
-        <Grid>
-          {this.props.images.map((item, index) => {
-            return (
-              <GridItem
-                key={index}
-                onClick={() => this.openPicture(item.src.original)}
-              >
-                <ImageCard src={item.src?.tiny} alt={item.alt} />
-              </GridItem>
-            );
-          })}
-        </Grid>
-        {this.props.isLoading && <h2>Loading...</h2>}
-      </>
-    );
-  }
-}
+
+  return (
+    <>
+      <Grid>
+        {images.map((item, index) => {
+          return (
+            <GridItem
+              key={index}
+              onClick={() => {
+                setModalImage(item.src.original);
+                toggleModal();
+              }}
+            >
+              <ImageCard src={item.src?.tiny} alt={item.alt} />
+            </GridItem>
+          );
+        })}
+      </Grid>
+      {isLoading && <h2>Loading...</h2>}
+      {showModal && <Modal toggleModal={toggleModal} src={modalImage} />}
+    </>
+  );
+};
 
 export default ImageGrid;
