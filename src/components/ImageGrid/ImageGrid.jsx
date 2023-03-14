@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { ImageCard } from "@/ImageCard";
-import { Grid, GridItem } from "./ImageGrid.styled";
-import { useGalleryContext } from "../../context";
-import Modal from "@/Modal/Modal";
+import React, { useState } from 'react';
+import { ImageCard } from '@/ImageCard';
+import { Grid, GridItem } from './ImageGrid.styled';
+import { useGalleryContext } from '../../context';
+import Modal from '@/Modal/Modal';
 
-const ImageGrid = ({ isLoading }) => {
+const ImageGrid = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalImage, setModalImage] = useState(null);
 
-  const { images } = useGalleryContext();
+  const { images, isLoading } = useGalleryContext();
 
   const toggleModal = () => {
     setShowModal(!showModal);

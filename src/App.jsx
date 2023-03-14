@@ -1,15 +1,15 @@
-import { SearchForm } from "@/SearchForm";
-import { HeaderComponent } from "@/Header";
-import { ImageGrid } from "@/ImageGrid";
-import { fetchPhotos } from "api/api";
-import { useEffect, useState, useRef } from "react";
-import { GalleryContext } from "./context";
+import { SearchForm } from '@/SearchForm';
+import { HeaderComponent } from '@/Header';
+import { ImageGrid } from '@/ImageGrid';
+import { fetchPhotos } from 'api/api';
+import { useEffect, useState, useRef } from 'react';
+import { GalleryContext } from './context';
 //
 
 function App() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [prevQuery, setPrevQuery] = useState("");
+  const [prevQuery, setPrevQuery] = useState('');
   const [curPage, setCurPage] = useState(1);
   const [photos, setPhotos] = useState([]);
 
@@ -30,7 +30,7 @@ function App() {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
@@ -54,11 +54,11 @@ function App() {
   }, [isLoading]);
 
   return (
-    <GalleryContext.Provider value={{ images: photos }}>
+    <GalleryContext.Provider value={{ images: photos, isLoading: isLoading }}>
       <HeaderComponent>
         <SearchForm onSubmit={handleSubmit} />
       </HeaderComponent>
-      <ImageGrid isLoading={isLoading} />
+      <ImageGrid />
     </GalleryContext.Provider>
   );
 }
