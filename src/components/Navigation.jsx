@@ -46,3 +46,7 @@ export default function Navigaion() {
     </>
   );
 }
+
+//class button logout: nav__item mla action__btn
+//class StyledLink: nav__item
+//class StyledLink to signin: nav__item mla
