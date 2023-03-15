@@ -1,4 +1,4 @@
 import { createContext, useContext } from "react";
 
-export const GalleryContext = createContext();
-export const useGalleryContext = () => useContext(GalleryContext);
+export const AppState = createContext();
+export const useAppState = () => useContext(AppState);

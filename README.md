@@ -1,9 +1,11 @@
-WEEK 2 - DAY 5
+# Module 5 Lesson 1
 
-TASK: https://github.com/josserden/react-blended/blob/lesson-02/source-code/task%231.md
+1. React Router
+2. useReducer
+3. useContex
 
-1. Loading logic
-2. Pagination
-3. Infinite scroll
-4. Pages
-5. Styling
+TASKS:
+
+1. Створити навігацію для панелі з авторизацією. Компонент Navigation огортає компоненти продуктів та авторизації.
+2. Створити глобальний стейт та додати його в контекст.
+3. Налаштувати доступ до стейту з використанням useReducer
