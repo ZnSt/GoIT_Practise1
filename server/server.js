@@ -10,11 +10,7 @@ const HOST = "http://localhost";
 
 const app = express();
 app.use(express.json());
-app.use(
-  cors({
-    origin: "http://localhost:1234",
-  })
-);
+app.use(cors());
 
 app.use("/product", isAuth, productRoutes.routes);
 app.use("/auth", authRoutes.routes);
