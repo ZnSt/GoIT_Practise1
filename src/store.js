@@ -6,7 +6,7 @@ const state = {
 };
 
 export const authReducer = function (state, action) {
-  console.log("action ia ar", action);
+  console.log("Action Reducer: ", action);
   switch (action.type) {
     case types.LOGIN:
       return {

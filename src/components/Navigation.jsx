@@ -1,8 +1,14 @@
-import { useReducer } from "react";
+import {
+  useEffect,
+  useReducer,
+  useState,
+  useContext,
+  useRef,
+  useMemo,
+} from "react";
 import { NavLink } from "react-router-dom";
-
 import styled from "styled-components";
-import { useAppState } from "../context";
+import { useAppState, AppState } from "../context";
 import { authReducer } from "../store";
 import { LOGOUT } from "../types";
 
@@ -15,10 +21,10 @@ const StyledLink = styled(NavLink)`
 `;
 
 export default function Navigaion() {
-  const [state, dispatch] = useReducer(authReducer, useAppState());
+  const state = useAppState();
 
   const logout = () => {
-    dispatch({ type: LOGOUT });
+    state.setContextState({ ...state, authToken: null });
   };
 
   return (
