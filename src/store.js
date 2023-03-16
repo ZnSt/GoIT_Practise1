@@ -1,4 +1,4 @@
-import * as types from './types';
+import * as types from "./types";
 
 const state = {
   products: [],
@@ -6,7 +6,7 @@ const state = {
 };
 
 export const authReducer = function (state, action) {
-  console.log(action);
+  console.log("action ia ar", action);
   switch (action.type) {
     case types.LOGIN:
       return {

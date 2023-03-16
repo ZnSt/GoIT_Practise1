@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { httpServer } from "../api";
+import { useAppState } from "../context";
+import { authReducer } from "../store";
+import { LOGIN } from "../types";
 
 export default function Login() {
+  const [state, dispatch] = useReducer(authReducer, useAppState());
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -12,7 +19,11 @@ export default function Login() {
         login,
         password,
       });
-      console.log(data.data);
+      dispatch({
+        type: LOGIN,
+        payload: data.data,
+      });
+      navigate("/");
     } catch (error) {
       console.error(error);
     }

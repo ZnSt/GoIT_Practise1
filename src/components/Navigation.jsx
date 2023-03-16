@@ -1,10 +1,10 @@
-import { useReducer } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useReducer } from "react";
+import { NavLink } from "react-router-dom";
 
-import styled from 'styled-components';
-import { useAppState } from '../context';
-import { authReducer } from '../store';
-import { LOGOUT } from '../types';
+import styled from "styled-components";
+import { useAppState } from "../context";
+import { authReducer } from "../store";
+import { LOGOUT } from "../types";
 
 const StyledLink = styled(NavLink)`
   color: black;
@@ -28,7 +28,7 @@ export default function Navigaion() {
           <>
             <StyledLink className="nav__item" to="/products">
               Products
-            </StyledLink>{' '}
+            </StyledLink>{" "}
             <button className="nav__item mla action__btn" onClick={logout}>
               Logout
             </button>
