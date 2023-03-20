@@ -1,14 +1,14 @@
-import { useReducer, useState, useCallback } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { httpServer } from "../api";
-import { useAppState } from "../context";
-import { authReducer } from "../store";
+// import { useAppState } from "../context";
+// import { authReducer } from "../store";
 import { LOGIN } from "../types";
 
 export default function Login() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const state = useAppState();
+  // const state = useAppState();
 
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ export default function Login() {
       password,
     });
 
-    state.setContextState({ ...state, authToken: data.data });
+    // state.setContextState({ ...state, authToken: data.data });
     navigate("/");
   };
   return (

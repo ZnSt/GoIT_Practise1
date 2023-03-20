@@ -1,16 +1,9 @@
-import {
-  useEffect,
-  useReducer,
-  useState,
-  useContext,
-  useRef,
-  useMemo,
-} from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { useAppState, AppState } from "../context";
-import { authReducer } from "../store";
+// import { useAppState, AppState } from "../context";
+// import { authReducer } from "../store";
 import { LOGOUT } from "../types";
+import { useSelector } from "react-redux";
 
 const StyledLink = styled(NavLink)`
   color: black;
@@ -21,17 +14,17 @@ const StyledLink = styled(NavLink)`
 `;
 
 export default function Navigaion() {
-  const state = useAppState(); // працює один раз, при моунті компоненти.
-
+  // const state = useAppState(); // працює один раз, при моунті компоненти.
+  const authToken = useSelector((state) => state.authToken);
   const logout = () => {
-    console.log("STATE: ", state);
-    state.setContextState({ ...state, authToken: null });
+    // console.log("STATE: ", state);
+    // state.setContextState({ ...state, authToken: null });
   };
 
   return (
     <>
       <div className="navigation">
-        {state.authToken ? (
+        {authToken ? (
           <>
             <StyledLink className="nav__item" to="/products">
               Products
