@@ -1,9 +1,7 @@
-import { NavLink } from "react-router-dom";
-import styled from "styled-components";
-// import { useAppState, AppState } from "../context";
-// import { authReducer } from "../store";
-import { LOGOUT } from "../types";
-import { useSelector } from "react-redux";
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutAc } from '../store/actions';
 
 const StyledLink = styled(NavLink)`
   color: black;
@@ -14,11 +12,10 @@ const StyledLink = styled(NavLink)`
 `;
 
 export default function Navigaion() {
-  // const state = useAppState(); // працює один раз, при моунті компоненти.
-  const authToken = useSelector((state) => state.authToken);
+  const authToken = useSelector((state) => state.auth.authToken);
+  const dispatch = useDispatch();
   const logout = () => {
-    // console.log("STATE: ", state);
-    // state.setContextState({ ...state, authToken: null });
+    dispatch(logoutAc());
   };
 
   return (
@@ -28,7 +25,7 @@ export default function Navigaion() {
           <>
             <StyledLink className="nav__item" to="/products">
               Products
-            </StyledLink>{" "}
+            </StyledLink>{' '}
             <button className="nav__item mla action__btn" onClick={logout}>
               Logout
             </button>

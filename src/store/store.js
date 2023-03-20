@@ -1,15 +1,11 @@
-import * as types from "../types";
-import { createStore } from "redux";
-import { devToolsEnhancer } from "@redux-devtools/extension";
+import { createStore } from 'redux';
+import { devToolsEnhancer } from '@redux-devtools/extension';
+import { combineReducers } from 'redux';
 
-const initialState = {
-  products: [],
-  authToken: null,
-};
+import { authReducer } from './reducer';
 
-const rootReducer = (state = initialState, action) => {
-  return state;
-};
-
+export const rootReducer = combineReducers({
+  auth: authReducer,
+});
 const enhancer = devToolsEnhancer();
 export const store = createStore(rootReducer, enhancer);

@@ -1,33 +1,30 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { httpServer } from "../api";
-// import { useAppState } from "../context";
-// import { authReducer } from "../store";
-import { LOGIN } from "../types";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { httpServer } from '../api';
+
+import { loginAc } from '../store/actions';
+import { useDispatch } from 'react-redux';
 
 export default function Login() {
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
-  // const state = useAppState();
-
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { data } = await httpServer.post("/auth/signin", {
+    const { data } = await httpServer.post('/auth/signin', {
       login,
       password,
     });
 
-    // state.setContextState({ ...state, authToken: data.data });
-    navigate("/");
+    dispatch(loginAc(data.data));
+
+    navigate('/');
   };
   return (
     <div className="form__wrapper">
-      <form
-        className="form"
-        //</div>onSubmit={handleSubmit}
-      >
+      <form className="form">
         <h2>Login</h2>
         <label htmlFor="login" className="label">
           Login
@@ -49,12 +46,7 @@ export default function Login() {
           defaultValue={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button
-          // type="submit"
-          type="button"
-          className="btn__submit"
-          onClick={(e) => handleSubmit(e)}
-        >
+        <button type="button" className="btn__submit" onClick={(e) => handleSubmit(e)}>
           Send
         </button>
       </form>
