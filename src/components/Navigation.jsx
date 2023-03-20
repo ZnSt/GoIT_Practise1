@@ -21,9 +21,10 @@ const StyledLink = styled(NavLink)`
 `;
 
 export default function Navigaion() {
-  const state = useAppState();
+  const state = useAppState(); // працює один раз, при моунті компоненти.
 
   const logout = () => {
+    console.log("STATE: ", state);
     state.setContextState({ ...state, authToken: null });
   };
 

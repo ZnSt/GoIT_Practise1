@@ -9,11 +9,11 @@ import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <CustomProvider value={state}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </CustomProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <CustomProvider value={state}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </CustomProvider>
+  // </React.StrictMode>
 );

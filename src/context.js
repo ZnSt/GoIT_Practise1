@@ -10,4 +10,5 @@ export const CustomProvider = ({ children, value }) => {
     </AppState.Provider>
   );
 };
+
 export const useAppState = () => useContext(AppState);

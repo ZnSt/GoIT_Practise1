@@ -18,6 +18,7 @@ export default function Login() {
       login,
       password,
     });
+
     state.setContextState({ ...state, authToken: data.data });
     navigate("/");
   };
