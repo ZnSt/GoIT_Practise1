@@ -1,11 +1,9 @@
-import { createStore } from 'redux';
-import { devToolsEnhancer } from '@redux-devtools/extension';
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+import { authReducer } from "./reducer";
 
-import { authReducer } from './reducer';
-
-export const rootReducer = combineReducers({
-  auth: authReducer,
+export const store = configureStore({
+  reducer: {
+    auth: authReducer,
+  },
 });
-const enhancer = devToolsEnhancer();
-export const store = createStore(rootReducer, enhancer);

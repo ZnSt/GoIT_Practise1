@@ -1,15 +1,7 @@
-import * as types from './types';
+import { createAction } from "@reduxjs/toolkit";
+import * as types from "./types";
 
-export const loginAc = (value) => {
-  return {
-    type: types.LOGIN,
-    payload: value,
-  };
-};
-
-export const logoutAc = () => {
-  return {
-    type: types.LOGOUT,
-    payload: null,
-  };
-};
+export const loginAc = createAction(types.LOGIN, (value) => ({
+  payload: value,
+}));
+export const logoutAc = createAction(types.LOGOUT, () => ({ payload: null }));
