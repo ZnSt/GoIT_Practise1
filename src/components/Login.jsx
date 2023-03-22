@@ -1,26 +1,24 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { httpServer } from "../api";
-
-import { userLogin } from "../store/auth";
-import { useDispatch } from "react-redux";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginOperation } from '../store/auth/operations';
 
 export default function Login() {
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const { data } = await httpServer.post("/auth/signin", {
-      login,
-      password,
-    });
+    dispatch(
+      loginOperation({
+        login,
+        password,
+      })
+    );
 
-    dispatch(userLogin(data.data));
-
-    navigate("/");
+    navigate('/');
   };
   return (
     <div className="form__wrapper">
@@ -46,11 +44,7 @@ export default function Login() {
           defaultValue={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button
-          type="button"
-          className="btn__submit"
-          onClick={(e) => handleSubmit(e)}
-        >
+        <button type="button" className="btn__submit" onClick={(e) => handleSubmit(e)}>
           Send
         </button>
       </form>
